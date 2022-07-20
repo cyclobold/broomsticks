@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const bcryptjs = require("bcryptjs");
+const Pusher = require("pusher");
 // require("dotenv").config(); //bring in the dotenv package.
-const { authConfig, databaseConfig, mailConfig } = require("./engine/config");
+const { authConfig, databaseConfig, mailConfig, pusherConfig } = require("./engine/config");
 var logger = require('morgan');
 const nodemailer = require("nodemailer");
 const mongodb = require("mongodb");
@@ -31,6 +32,14 @@ const mongodbSessionStore = new mongodbSession({
   databaseName: "broomsticks-sessions",
   collection: "broomsticks-sessions"
 })
+
+const pusher = new Pusher({
+  appId: pusherConfig.pusher_app_id,
+  key: pusherConfig.pusher_key,
+  secret: pusherConfig.pusher_secret,
+  cluster: pusherConfig.pusher_cluster,
+  useTLS: pusherConfig.pusher_use_tls
+});
 
 
 //bring in the session
@@ -97,7 +106,7 @@ const internally_check_user_exists = async (email, password) => {
 
 
 }
-
+//Endpoints
 app.post("/logout", function(req, res){
   //logout the user 
   req.session.destroy(function(error){
@@ -110,8 +119,19 @@ app.post("/logout", function(req, res){
 
 })
 
+app.post("/create-new-post", function(request, response){
 
-//Endpoints
+  pusher.trigger("blogs", "new-post", {
+    post_title: request.body.post_title,
+    post_content: request.body.post_content,
+    post_date: new Date().getTime()
+})
+
+
+  response.send({});
+  
+})
+
 
 //Login User
 app.post("/login-user", async function(request, response){
