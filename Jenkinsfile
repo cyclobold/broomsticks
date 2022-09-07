@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('testing'){
             steps{
-
+                echo "This is test area"
             }
         }
 
