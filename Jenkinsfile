@@ -23,6 +23,8 @@ pipeline{
                     sudo git checkout with-auth-thought-jenkins
                     sudo git pull origin with-auth-thought-jenkins
                     sudo npm install
+                    pm2 kill
+                    PORT=3000 pm2 start ./bin/www
                    '''
             }
         }
