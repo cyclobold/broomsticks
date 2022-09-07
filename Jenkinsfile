@@ -18,6 +18,7 @@ pipeline{
                     cd /var/www/
                     sudo pm2 kill
                     cd html
+                    sudo npm install
                     sudo PORT=3000 pm2 start ./bin/www
                     '''
             }
