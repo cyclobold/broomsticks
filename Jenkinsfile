@@ -12,7 +12,7 @@ pipeline{
             steps{
                 echo "Running in the EC2 instance"
                 sh '''
-                    sudo ssh -t -o StrictHostKeyChecking=no -i /var/lib/jenkins/testnode.pem ubuntu@ec2-13-41-80-52.eu-west-2.compute.amazonaws.com
+                    sudo ssh -t -o StrictHostKeyChecking=no -i /var/lib/jenkins/testnode.pem ubuntu@ec2-18-133-234-83.eu-west-2.compute.amazonaws.com
                     cd /var/www
                     sudo rm -rf html
                     sudo mkdir html
