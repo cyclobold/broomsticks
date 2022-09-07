@@ -22,8 +22,8 @@ pipeline{
                     sudo git fetch
                     sudo git checkout with-auth-thought-jenkins
                     sudo git pull origin with-auth-thought-jenkins
-                    npm install
-                    npm run start
+                    sudo npm install
+                    sudo npm run start
                    '''
             }
         }
