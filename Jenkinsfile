@@ -21,7 +21,7 @@ pipeline{
                     sudo git remote add origin https://github.com/cyclobold/broomsticks.git
                     sudo git fetch
                     sudo git checkout with-auth-thought-jenkins
-                    sudo pull origin with-auth-thoughts
+                    sudo git pull origin with-auth-thoughts
                     sudo npm install
                     sudo npm run start
                    '''
